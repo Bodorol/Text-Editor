@@ -10,13 +10,14 @@ class TextEditor extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 400);
         setLocationRelativeTo(null);
-        setVisible(true);
-
 
         JPanel greenPanel = new JPanel();
         greenPanel.setLayout(new FlowLayout());
-        greenPanel.setBounds(0, 20, 500, 400);
-        add(greenPanel);
+        greenPanel.setBounds(0, 0, 500, 50);
+
+        JPanel bluePanel = new JPanel();
+        bluePanel.setLayout(new BorderLayout());
+        bluePanel.setBounds(0, 50, 500, 350);
 
         JTextField fileNameArea = new JTextField(20);
         fileNameArea.setName("FilenameField");
@@ -27,17 +28,11 @@ class TextEditor extends JFrame {
         JButton loadButton = new JButton("Load");
         loadButton.setName("LoadButton");
 
-        greenPanel.add(fileNameArea);
-        greenPanel.add(saveButton);
-        greenPanel.add(loadButton);
-
         JTextArea editArea = new JTextArea();
         editArea.setName("TextArea");
         editArea.setBounds(50, 50, 400, 275);
         JScrollPane scroller = new JScrollPane(editArea);
         scroller.setName("ScrollPane");
-        scroller.setBounds(50, 50, 400, 275);
-        greenPanel.add(scroller);
 
         saveButton.addActionListener(e -> {
             File file = new File(fileNameArea.getText());
@@ -58,9 +53,17 @@ class TextEditor extends JFrame {
             }
         });
 
+
+        greenPanel.add(fileNameArea);
+        greenPanel.add(saveButton);
+        greenPanel.add(loadButton);
+        bluePanel.add(scroller, BorderLayout.CENTER);
+        add(bluePanel);
+        add(greenPanel);
+        setVisible(true);
     }
 
     public static void main(String[] args) {
-        new TextEditor();
+        TextEditor text = new TextEditor();
     }
 }
